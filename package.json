@@ -5,6 +5,7 @@
   "scripts": {
     "type-check": "tsc -p tsconfig.json --noEmit",
     "dev": "next dev --turbo",
+    "format:all": "prettier . --write --ignore-unknown",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --ext .ts,.tsx -c .eslintrc.json --fix"
@@ -59,6 +60,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-unused-imports": "^3.2.0",
     "postcss": "8.4.38",
+    "prettier": "^3.4.2",
     "tailwind-variants": "0.1.20",
     "tailwindcss": "3.4.3",
     "typescript": "5.0.4"
