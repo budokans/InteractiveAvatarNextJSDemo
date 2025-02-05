@@ -121,6 +121,7 @@ export default function InteractiveAvatar() {
       setIsLoadingSession(false);
     }
   }
+
   async function handleSpeak() {
     setIsLoadingRepeat(true);
     if (!avatar.current) {
@@ -130,12 +131,13 @@ export default function InteractiveAvatar() {
     }
     // speak({ text: text, task_type: TaskType.REPEAT })
     await avatar.current
-      .speak({ text: text, taskType: TaskType.REPEAT, taskMode: TaskMode.SYNC })
+      .speak({ text: text, taskType: TaskType.TALK, taskMode: TaskMode.SYNC })
       .catch((e) => {
         setDebug(e.message);
       });
     setIsLoadingRepeat(false);
   }
+
   async function handleInterrupt() {
     if (!avatar.current) {
       setDebug('Avatar API not initialized');
@@ -146,6 +148,7 @@ export default function InteractiveAvatar() {
       setDebug(e.message);
     });
   }
+
   async function endSession() {
     await avatar.current?.stopAvatar();
     setStream(undefined);
@@ -158,12 +161,14 @@ export default function InteractiveAvatar() {
     if (v === 'text_mode') {
       avatar.current?.closeVoiceChat();
     } else {
+      console.log('Starting voice chat');
       await avatar.current?.startVoiceChat();
     }
     setChatMode(v);
   });
 
   const previousText = usePrevious(text);
+
   useEffect(() => {
     if (!previousText && text) {
       avatar.current?.startListening();
